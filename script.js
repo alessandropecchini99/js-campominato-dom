@@ -1,14 +1,11 @@
 /* CAMPO_MINATO - ESERCIZIO CON BONUS */
 // 1. L'utente sceglie la difficoltà e clicca su play
-// 2. Che genererà una griglia di gioco quadrata in base alla difficoltà (easy 7x7 / medium 9x9 / hard 10x10)
-// 3. Quando l'utente clicca su ogni cella... 
-// 4. ...la cella cliccata si colora di azzurro
+// 2. Che genererà una griglia di gioco quadrata in base alla difficoltà (easy 7x7 / medium 9x9 / hard 10x10) e le bombe
+// 3. Quando l'utente clicca su ogni cella... (creo un evento)
+// 4. ...la cella cliccata si colora di blu se giusta, rossa se è sbagliata
 // 5. Emetto un messaggio in console con il numero della cella cliccata
-// -------- REGOLE DI GIOCO --------
-// 6. Genero 16 numeri casuali in un array per piazzare le "bombe"
-// 7. SE l'utente clicca su una cell corrispospondetne, coloro di rosso
-// 8. Il gioco finisce
-// 9. mostro a schermo lo score
+// 6. Il gioco finisce
+// 7. Mostro a schermo lo score
 
 
 // dichiaro variabili fuori dal button
@@ -22,6 +19,10 @@ function() {
     // pulisco lo spazio di gioco
     document.querySelector(`.grid`).innerHTML = "";
     grid.style.cssText += 'border: 0px;';
+    grid.classList.remove(`no_click`)
+
+    let txtScore = document.querySelector(`.score`);
+    txtScore.innerHTML = "";
     let score = 0;
     
     // 2. GENERO GRIGLIA
@@ -31,7 +32,7 @@ function() {
     // flag
     let NumCell = 0;
 
-    // 6. GENERO ARRAY PER LE BOMBE
+    // array per le bombe
     let arrNBomb = [];
     
     // controllo difficoltà per determinare la grandezza della griglia e il numero delle bombe
@@ -76,14 +77,23 @@ function() {
         // seleziono la cella in base all0index
         const cell = listCells[i];
 
-        // 4. CLICK -> COLORARE DI BLU LA CELL
+        // 4. CLICK -> BLU SE GOOD / ROSSA PERDI
         cell.addEventListener(`click`, 
             function() {
-
-                cell.classList.toggle(`clicked-good`);
                 // 5. NUMERO IN CONSOLE
                 console.log(`Num Selezionato:` + ` ` + this.innerHTML);
-                score++;
+                
+                if (arrNBomb.includes(parseInt(this.innerHTML))) {
+                    // 6. FINE PARTITA
+                    this.classList.toggle(`clicked-lose`);
+                    grid.classList.add(`no_click`);
+
+                    txtScore.innerHTML += `Score raggiunto: ` + score;
+
+                } else {
+                    this.classList.toggle(`clicked-good`);
+                    score++;
+                }
                 
             }
         )
@@ -106,11 +116,13 @@ function griglia(nCell, contenitore) {
 
 // function per controllare che i numeri in arrNBomb non si ripetano
 function checkArrBomb(min, max, arr) {
-    for (let i = arr.length; i < 16; i++) {
+    while (arr.length < 16) {
+
         let newNum = nRandom(min, max);
         if (!arr.includes(newNum)) {
           arr.push(newNum);
         }
+
     }
 }
 

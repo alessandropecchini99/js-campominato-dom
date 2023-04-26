@@ -72,6 +72,10 @@ main {
     color: white;
 }
 
+.no_click {
+    pointer-events: none;
+}
+
 /*--- FOOTER ---*/
 footer {
     height: 5vh;
