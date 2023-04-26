@@ -22,23 +22,25 @@
     <nav class="d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
             <img src="mobile-logo.png" alt="boolean">
-            <h1 class="fw-bold m-0">Mine Sweeper</h1>
+            <h1 class="fw-bold m-0">Mine Sweeper #96</h1>
         </div>
         <div class="d-flex align-items-center px-5">
                 <label for="difficult">Difficoltà:</label>
                 <select name="difficult" id="difficult">
-                    <option value="riseleziona!" selected>Choose here!</option>
+                    <option value="riseleziona!" selected>Scegli</option>
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
                     <option value="hard">Hard</option>
+                    <option value="souls">Souls-Like</option>
                 </select>
                 <button id="play">Play!</button>
         </div>
     </nav>
 
     <!-- MAIN -->
-    <main class="d-flex justify-content-center align-items-center">
+    <main class="d-flex justify-content-center flex-column align-items-center">
         <div class="grid"></div>
+        <h3><span id="score"></span></h3>
     </main>
 
     <!-- FOOTER -->
