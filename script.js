@@ -16,8 +16,8 @@ const btnPlay = document.querySelector(`#play`);
 btnPlay.addEventListener(`click`, 
 function() {
 
-    // -------- SETTA QUA IL NUMERO DI BOMBE ---------
-    const numBombe = 1;
+    // ************** --- SETTA QUA IL NUMERO DI BOMBE DA GENERARE --- **************
+    const numBombe = 16;
     
     // pulisco lo spazio di gioco
     document.querySelector(`.grid`).innerHTML = "";
