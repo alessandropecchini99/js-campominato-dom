@@ -15,6 +15,9 @@ const btnPlay = document.querySelector(`#play`);
 // 1. BUTTON
 btnPlay.addEventListener(`click`, 
 function() {
+
+    // -------- SETTA QUA IL NUMERO DI BOMBE ---------
+    const numBombe = 1;
     
     // pulisco lo spazio di gioco
     document.querySelector(`.grid`).innerHTML = "";
@@ -24,6 +27,9 @@ function() {
     let txtScore = document.querySelector(`.score`);
     txtScore.innerHTML = "";
     let score = 0;
+
+    let txtResult = document.querySelector(`.result`);
+    txtResult.innerHTML = "";
     
     // 2. GENERO GRIGLIA
     let difficult = document.querySelector(`#difficult`).value.toLowerCase().replace(" ", "");
@@ -31,6 +37,7 @@ function() {
     
     // flag
     let NumCell = 0;
+    let goodCell = 1;
 
     // array per le bombe
     let arrNBomb = [];
@@ -41,25 +48,25 @@ function() {
             griglia(25, grid);
             NumCell = 5;
             grid.style.cssText += 'border: 1px solid black;';
-            checkArrBomb(1, 25, arrNBomb);
+            checkArrBomb(1, 25, arrNBomb, numBombe);
             break;
         case `hard`:
             griglia(81, grid);
             NumCell = 9;
             grid.style.cssText += 'border: 1px solid black;';
-            checkArrBomb(1, 81, arrNBomb);
+            checkArrBomb(1, 81, arrNBomb, numBombe);
             break;
         case `medium`:
             griglia(100, grid);
             NumCell = 10;
             grid.style.cssText += 'border: 1px solid black;';
-            checkArrBomb(1, 100, arrNBomb);
+            checkArrBomb(1, 100, arrNBomb, numBombe);
             break;
         case `easy`:
             griglia(225, grid);
             NumCell = 15;
             grid.style.cssText += 'border: 1px solid black;';
-            checkArrBomb(1, 225, arrNBomb);
+            checkArrBomb(1, 225, arrNBomb, numBombe);
             break;
     }
 
@@ -82,6 +89,7 @@ function() {
             function() {
                 // 5. NUMERO IN CONSOLE
                 console.log(`Num Selezionato:` + ` ` + this.innerHTML);
+                let result = checkWin(listCells.length, numBombe, goodCell);
                 
                 if (arrNBomb.includes(parseInt(this.innerHTML))) {
                     // 6. FINE PARTITA
@@ -89,10 +97,23 @@ function() {
                     grid.classList.add(`no_click`);
 
                     txtScore.innerHTML += `Score raggiunto: ` + score;
+                    txtResult.innerHTML += `Hai Perso!`;
 
-                } else {
+                    
+                } else if (result == `win`) {
+
+                    score++
                     this.classList.toggle(`clicked-good`);
+                    txtScore.innerHTML += `Score raggiunto: ` + score;
+                    txtResult.innerHTML += `Hai Vinto!`;
+                    
+                } else {
+
+                    this.classList.toggle(`clicked-good`);
+                    this.classList.add(`no_click`);
                     score++;
+                    goodCell++;
+
                 }
                 
             }
@@ -115,18 +136,27 @@ function griglia(nCell, contenitore) {
 }
 
 // function per controllare che i numeri in arrNBomb non si ripetano
-function checkArrBomb(min, max, arr) {
-    while (arr.length < 16) {
-
+function checkArrBomb(min, max, arr, repeat) {
+    while (arr.length < repeat) {
         let newNum = nRandom(min, max);
         if (!arr.includes(newNum)) {
           arr.push(newNum);
         }
-
     }
 }
 
 // function per i numeri casuali
 function nRandom(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
-  }
+}
+
+// function per vincita
+function checkWin(totCelle, bombe, celleBuone) {
+    let numFreeSpace = totCelle - bombe;
+    if (numFreeSpace == celleBuone) {
+        console.log(`ALLLOOORRAAAAA`)
+        return `win`;
+    } else {
+        return `lose`;
+    }
+}
