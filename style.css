@@ -1,82 +1,80 @@
 img {
-    height: 100px;
-    aspect-ratio: 1 / 1;
+  height: 8vh;
+  aspect-ratio: 1 / 1;
 }
 
 button {
-    border: 1px solid grey;
-    background-color: rgb(249, 220, 0);
-    font-size: 1.5em;
-    border-radius: 5px;
-    padding: 2px 15px;
-    font-weight: lighter;
+  border: 1px solid grey;
+  background-color: rgb(249, 220, 0);
+  font-size: 1.5em;
+  border-radius: 5px;
+  padding: 2px 15px;
+  font-weight: lighter;
 }
 
 button:hover {
-    background-color: #ffef74;
+  background-color: #ffef74;
 }
-
 
 /*--- NAV ---*/
 nav {
-    height: 8vh;
+  height: 8vh;
 }
 
 select {
-    margin-right: 1em;
-    margin-left: 0.4em;
-    padding-inline: 4px;
-    font-weight: 200;
+  margin-right: 1em;
+  margin-left: 0.4em;
+  padding-inline: 4px;
+  font-weight: 200;
 }
-
 
 /*--- MAIN ---*/
 main {
-    height: 87vh;
-    background-color: rgb(127,255,212);
+  height: 87vh;
+  background-color: rgb(127, 255, 212);
 }
 
 /* griglia */
 .grid {
-    width: 1000px;
-    height: 1000px;
-    display: flex;
-    flex-wrap: wrap;
-    box-sizing: content-box;
+  width: 1000px;
+  height: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: content-box;
 }
 
 .cell_fluid {
-    width: calc(100% / var(--sezione));
-    height: calc(100% / var(--sezione));
-	flex-grow: 0;
-	flex-shrink: 0;
-    /* ------------------- */
-    border: 1px solid black;
-    color: blue;
-    /* ------------------- */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* ------------------- */
-    font-size: 1em;
-	cursor: pointer;
+  width: calc(100% / var(--sezione));
+  height: calc(100% / var(--sezione));
+  flex-grow: 0;
+  flex-shrink: 0;
+  /* ------------------- */
+  border: 1px solid black;
+  color: blue;
+  /* ------------------- */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* ------------------- */
+  font-size: 1em;
+  cursor: pointer;
 }
 
 .clicked-good {
-    background-color: rgb(0, 52, 207);
-    color: white;
+  background-color: rgb(0, 52, 207);
+  color: white;
 }
 
 .clicked-lose {
-    background-color: rgb(88, 0, 0);
-    color: white;
+  background-color: rgb(88, 0, 0);
+  color: white;
 }
 
 .no_click {
-    pointer-events: none;
+  pointer-events: none;
 }
 
 /*--- FOOTER ---*/
 footer {
-    height: 5vh;
+  height: 5vh;
 }
